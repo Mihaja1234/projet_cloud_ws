@@ -1,0 +1,45 @@
+mila miconnect @ le serveur mongoDB ato aloh elah : mongodb+srv://hardi148:hajarisoa148@cluster0.nxgu7.mongodb.net/cloudfinal
+any @ mongoCompass io miconnect @ io url io 
+
+D mila misy connection fona elah a chaque fois mi lance an le projet satry efa mis mongo ao 
+
+D lee pathvariable iduser na id ny anaran ao zay reo soloy token dahol D decommentena fotsin le zavatra commenter reo 
+
+D mila mijer an le connexion rehetra ao elah fa tena korontana beuh aloh iny D ovain lah user sy mdp an lah fa tss ftona nandaminana an le izy tsara ataok demain raha tratrako
+
+.web service FrontOffice : 0
+
+EnhereRestController -> listeEnchere
+                     -> ficheEnchere /idEnchere
+                     -> search
+
+HistoriqueOffreRestController -> ReEncherir/{idenchere}/{iduser}
+			     -> listeOffre/{idenchere}
+
+HistoriqueRestController -> HistoriqueEncherisseur
+			-> HistoriqueVente
+			-> ResultatEnchere/{idenchere}
+           	
+UtilisateurRestController ->  /login
+
+.web service Mobile :
+
+UtilisateurRestController  -> /traitementInscription
+                           -> rechargementCompte/{id}
+
+EnchereRestController      -> AjoutEnchere/{id}
+		           -> pic/{idproduit}
+			   -> ListeEnchereUser
+
+NotificationRestController (MongoDB) (izay rehetra ao tafiditra mobile dahol)
+
+bon rehefa mi test an le mongo any @ postman elah : ka handefa zavatra de type post 
+D mila mandeh ao @ "body" aloh D aveo "raw" 
+donnée atao ao be like : {"parametre":"valeur","":"","":""}
+
+
+donne moi un script de code pour mettre un bon formulaire pour mettre le montant lors d'une enchère  sur ionic react . 
+
+donne moi un script de code pour afficher une liste sur un tableau  sur ionic react
+
+donne moi un script de code pour mettre un bon formulaire pour ajouter une photo genre parcourir le fichier du disque local et mettre l'image en base64 et cliquer sur un bouton pour stocker l'image en base64 sur localstorage 

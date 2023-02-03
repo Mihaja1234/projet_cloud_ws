@@ -20,7 +20,7 @@ import java.util.List;
 @RequestMapping("/api/historique")
 @CrossOrigin
 public class HistoriqueRestController {
-    Connexion con = new Connexion();
+
     Connection con1;
     {
         try {
@@ -34,6 +34,7 @@ public class HistoriqueRestController {
     {
         TokenUserDao tud = new TokenUserDao();
         TokenUser tu;
+        Connexion con = new Connexion();
          try {
              if(tud.validTokenUser(token)!=0)
              {
@@ -48,6 +49,9 @@ public class HistoriqueRestController {
          {
              return new ResponseEntity<>(HttpStatus.NOT_FOUND);
          }
+         finally {
+             con.close();
+         }
     }
 
     @GetMapping("HistoriqueVente")
@@ -55,6 +59,7 @@ public class HistoriqueRestController {
     {
         TokenUserDao tud = new TokenUserDao();
         TokenUser tu;
+        Connexion con = new Connexion();
         try {
             if(tud.validTokenUser(token)!=0)
             {
@@ -68,6 +73,9 @@ public class HistoriqueRestController {
         catch(Exception e)
         {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        finally{
+            con.close();
         }
     }
 
@@ -86,12 +94,16 @@ public class HistoriqueRestController {
     @GetMapping("ResultatEnchere/{idEnchere}")
     public ResponseEntity<List<Object[]>> ResultatEnchere(@PathVariable("idEnchere") int idEnchere)
     {
+        Connexion con = new Connexion();
         try {
             return new ResponseEntity<List<Object[]>>(new HistoriqueOffreDao().userGagnantView(con,idEnchere), HttpStatus.OK);
         }
         catch(Exception e)
         {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        finally {
+            con.close();
         }
     }
 

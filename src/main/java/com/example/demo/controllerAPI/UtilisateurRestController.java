@@ -30,11 +30,12 @@ public class UtilisateurRestController {
             throw new RuntimeException(e);
         }
     }
-    Connexion con1 = new Connexion();
+
 
     @PostMapping("/Inscription")
     public Response traitementInscription(@RequestParam("nom") String nom, @RequestParam("prenom") String prenom, @RequestParam("email") String email, @RequestParam("mdp") String mdp)
     {
+        Connexion con1 = new Connexion();
         Response response = new Response();
         try{
             ud.Inscription(con1,nom,prenom,email,mdp);
@@ -45,6 +46,9 @@ public class UtilisateurRestController {
         {
             response.setStatus("400");
             response.setMessage("Inscripiton impossible");
+        }
+        finally {
+            con1.close();
         }
         return response;
     }
@@ -72,6 +76,7 @@ public class UtilisateurRestController {
     @PostMapping("/rechargementCompte")
     public Response rechargementCompte(@RequestParam("montant") float montant,@RequestHeader("token") String token)
     {
+        Connexion con1 = new Connexion();
         Response response = new Response();
         TokenUserDao tud = new TokenUserDao();
         TokenUser tu;
@@ -88,6 +93,9 @@ public class UtilisateurRestController {
              }
         } catch (Exception e) {
             throw new RuntimeException(e);
+        }
+        finally {
+            con1.close();
         }
         return response;
     }

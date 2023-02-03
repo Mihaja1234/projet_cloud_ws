@@ -22,7 +22,7 @@ import java.util.List;
 @RequestMapping("/api/HistoriqueOffre")
 @CrossOrigin
 public class HistoriqueOffreRestController {
-    Connexion con = new Connexion();
+
     HistoriqueOffreDao hod = new HistoriqueOffreDao();
     Connection con1;
     {
@@ -36,6 +36,7 @@ public class HistoriqueOffreRestController {
     @PostMapping("ReEncherir/{idEnchere}")
     public Response ReEncherir(@PathVariable int idEnchere, @RequestHeader("token") String token, @RequestParam("montant") float montant_offre) throws Exception {
         Response response = new Response();
+        Connexion con = new Connexion();
        TokenUserDao tud = new TokenUserDao();
        TokenUser t;
         if(tud.validTokenUser(token)!=0)
@@ -71,6 +72,7 @@ public class HistoriqueOffreRestController {
         else{
             response.setMessage("veuillez dabord vous authentifier");
         }
+        con.close();
         return response;
     }
 

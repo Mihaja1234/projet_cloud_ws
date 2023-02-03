@@ -26,7 +26,7 @@ public class EnchereRestController {
     HistoriqueOffreDao hod = new HistoriqueOffreDao();
 
     PrelevementEnchereDao ped = new PrelevementEnchereDao();
-  Connexion con1 = new Connexion();
+
     Connection con;
     {
         try {
@@ -38,6 +38,7 @@ public class EnchereRestController {
 
     @GetMapping("listeEnchere")
     public ResponseEntity<List<Enchere>> getListeEnchere(){
+        Connexion con1 = new Connexion();
         try{
             List<Enchere> list = ed.getListEnchere(con);
             for(Enchere e : list)
@@ -48,10 +49,14 @@ public class EnchereRestController {
         }catch(Exception e){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+        finally{
+            con1.close();
+        }
     }
 
     @GetMapping("listeEnchereTerminer")
     public ResponseEntity<List<Enchere>> getListeEnchereTerminer(){
+        Connexion con1 = new Connexion();
         try{
             List<Enchere> list1 = ed.getListEnchere(con);
             for(Enchere e : list1)
@@ -63,21 +68,29 @@ public class EnchereRestController {
         }catch(Exception e){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+        finally {
+            con1.close();
+        }
     }
 
 
     @GetMapping("ficheEnchere/{idEnchere}")
     public ResponseEntity<List<Object[]>> getFicheEnchere(@PathVariable int idEnchere){
+        Connexion con1 = new Connexion();
         try{
             return new ResponseEntity<List<Object[]>>(new EnchereDao().FicheEnchere(con1,idEnchere), HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        finally{
+            con1.close();
         }
     }
 
 
     @GetMapping("ListeEnchereUser")
     public ResponseEntity<List<Object[]>> ListeEnchereUser(@RequestHeader("token") String token){
+        Connexion con1 = new Connexion();
         TokenUserDao tud = new TokenUserDao();
         TokenUser tu = new TokenUser();
         try{
@@ -92,6 +105,9 @@ public class EnchereRestController {
         }catch(Exception e){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+        finally {
+            con1.close();
+        }
     }
 
     @PostMapping("AjoutEnchere")
@@ -99,6 +115,7 @@ public class EnchereRestController {
         Response response = new Response();
         TokenUserDao tud = new TokenUserDao();
         TokenUser tu;
+        Connexion con1 = new Connexion();
         if(tud.validTokenUser(token)!=0)
         {
                 tu = tud.getTokenUser(token);
@@ -119,6 +136,7 @@ public class EnchereRestController {
                     response.setStatus("200");
                     response.setDatas(String.valueOf(result));
                 }
+                con1.close();
         }
        else
        {
@@ -133,12 +151,14 @@ public class EnchereRestController {
     public Response ProduitEnchere(@PathVariable int idEnchere,@RequestParam("idProduit") int idProduit,@RequestHeader("token") String token) throws Exception {
         Response response = new Response();
         TokenUserDao tud = new TokenUserDao();
+        Connexion con1 = new Connexion();
         if(tud.validTokenUser(token)!=0)
         {
             int result = p.AjouterProduitEnchere(con1,idEnchere,idProduit);
             response.setMessage("Ajout produit bien effectuee");
             response.setStatus("200");
             response.setDatas(String.valueOf(result));
+            con1.close();
         }
         else{
             response.setMessage("token expiré");
@@ -152,10 +172,12 @@ public class EnchereRestController {
     public Response AjoutPhotoEnchere(@PathVariable("idproduit") int idproduit,@RequestParam("photo") String photo,@RequestHeader("token") String token) throws Exception {
         Response response = new Response();
         TokenUserDao tud = new TokenUserDao();
+        Connexion con1 = new Connexion();
         if(tud.validTokenUser(token)!=0)
         {
             p.AjouterPhotoProduit(con1,idproduit,photo);
             response.setMessage("image bien ajoutée");
+            con1.close();
         }
         else{
             response.setMessage("token expiré");
@@ -170,12 +192,16 @@ public class EnchereRestController {
                                         @RequestParam(required = false, value="description") String category,
                                         @RequestParam(required = false, value="status") String auctionStatus,
                                         @RequestParam(required = false, value="motcle") String keywords){
+        Connexion con1 = new Connexion();
 
         PreparedStatement stmt = ed.generateStatement(con1,startDate,endDate,category,auctionStatus,keywords);
         List<Enchere> encheres= null;
         try {
             encheres = ed.getListEnchereRecherche(stmt);
         } catch (Exception e) {
+        }
+        finally {
+            con1.close();
         }
         return encheres;
     }

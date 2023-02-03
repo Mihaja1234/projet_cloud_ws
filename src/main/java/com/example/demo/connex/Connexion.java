@@ -29,7 +29,7 @@ public class Connexion
     public Connexion()
     {
         try {
-            Class.forName("org.postgresql.Driver");
+//            Class.forName("org.postgresql.Driver");
             this.con = DriverManager.getConnection("jdbc:postgresql://containers-us-west-176.railway.app:6766/railway", "postgres", "AjX5u0RqyKOAbDLxpYml");
         } catch (Exception e) {
         } finally {

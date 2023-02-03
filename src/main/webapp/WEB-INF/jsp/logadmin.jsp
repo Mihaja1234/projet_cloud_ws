@@ -6,13 +6,14 @@
     <title>Administrator</title>
     <link rel="stylesheet" type="text/css" href="assets/Login/css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="assets/General/bootstrap/css/bootstrap.min.css">
     <script src="https://kit.fontawesome.com/a81368914c.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 
    <h1>Back Office Administrateur</h1>
-     <form method="POST" action="/login" class="login-form">
+     <form method="POST" action="/login" class="card-body mx-auto w-25 bg-gradient-success p-4">
      		      		<div class="form-group">
      		      			<input type="text" class="form-control rounded-left"  name="email" value="${email}" required>
      		      		</div>

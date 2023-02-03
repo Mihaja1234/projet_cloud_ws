@@ -13,7 +13,7 @@
 <body>
 
    <h1>Back Office Administrateur</h1>
-     <form method="POST" action="/login" class="card-body mx-auto w-25 bg-gradient-success p-4">
+     <form method="POST" action="/login" class="card-body mx-auto w-50 bg-gradient-success p-3">
      		      		<div class="form-group">
      		      			<input type="text" class="form-control rounded-left"  name="email" value="${email}" required>
      		      		</div>

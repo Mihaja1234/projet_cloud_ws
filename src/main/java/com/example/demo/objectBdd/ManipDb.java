@@ -45,7 +45,7 @@ public class ManipDb {/* this class is for all database manipulations */
         database="enchere";
         String url = "jdbc:postgresql://localhost/" + database;
         user="postgres";
-        password="root";
+        password="hasinjaka";
         Connection con = DriverManager.getConnection(url, user, password);
         return con;
     }

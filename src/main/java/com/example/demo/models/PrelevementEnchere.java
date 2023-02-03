@@ -1,8 +1,10 @@
 package com.example.demo.models;
 
+import com.example.demo.objectBdd.Mere;
+
 import java.sql.Date;
 
-public class PrelevementEnchere extends objectBdd.Mere{
+public class PrelevementEnchere extends Mere {
     private int idEnchere;
     private float montant;
     private Date DatePrelevement;

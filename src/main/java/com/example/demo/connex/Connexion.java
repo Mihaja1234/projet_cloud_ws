@@ -6,6 +6,7 @@ public class Connexion
     Connection con;
     public Statement stat;
     ResultSet res;
+    PreparedStatement prepstat;
 
     public Connexion(String req)
     {
@@ -29,7 +30,7 @@ public class Connexion
     {
         try {
             Class.forName("org.postgresql.Driver");
-            this.con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cloudfinal", "postgres", "root");
+            this.con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/enchere", "postgres", "hasinjaka");
         } catch (Exception e) {
         } finally {
         }
@@ -38,7 +39,8 @@ public class Connexion
 
 
     public PreparedStatement prepareStatement(String query) throws SQLException{
-        return this.con.prepareStatement(query);
+        prepstat=this.con.prepareStatement(query);
+        return prepstat;
     }
     public ResultSet getResultset()
     {
@@ -55,6 +57,28 @@ public class Connexion
     public Statement getStat()
     {
         return this.stat;
+    }
+
+    public void close() {
+        try{
+        if (stat != null) {
+            stat.close();
+        }
+        if (prepstat != null) {
+            prepstat.close();
+        }
+        if (res != null) {
+            res.close();
+        }
+        if (con != null) {
+
+            con.close();
+
+        }
+    }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
 

@@ -1,9 +1,11 @@
 package com.example.demo.models;
 
+import com.example.demo.objectBdd.Mere;
+
 import java.sql.Date;
 import java.sql.Timestamp;
 
-public class Enchere extends objectBdd.Mere {
+public class Enchere extends Mere {
     private int idenchere;
     private int idUtilisateur;
     private  String description;

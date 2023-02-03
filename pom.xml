@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>demo</artifactId>
+	<artifactId>projet_cloud_ws</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>demo</name>
-	<description>Demo project for Spring Boot</description>
+	<name>projet_cloud_ws</name>
+	<description>Web Service Enchere</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>

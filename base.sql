@@ -117,22 +117,7 @@ role varchar(15)
 );
 
 
-----view categorie Produit Vendu----
-create or replace view categorieProduitVendu as  
-WITH all_categories AS (SELECT idCategorieProduit FROM CategorieProduit)
-SELECT cp2.idCategorieProduit, cp2.typeCategorie , COUNT(re.idEnchere) as total_produit_vendu
-FROM all_categories cp
-LEFT JOIN Produit p 
-using(idCategorieProduit)
-LEFT JOIN Produit_Enchere pe 
-using(idProduit)
-LEFT JOIN Enchere e 
-using(idEnchere)
-LEFT JOIN ResultatEnchere re 
-ON re.idEnchere = e.idEnchere AND re.idEnchere = pe.idEnchere
-LEFT JOIN CategorieProduit cp2
-ON cp2.idCategorieProduit = cp.idCategorieProduit
-GROUP BY cp2.idCategorieProduit,cp2.typeCategorie order by COUNT(re.idEnchere) desc;
+
 
 
 -----view statistique client----
@@ -201,3 +186,22 @@ INNER JOIN (SELECT idenchere, max(montant_offre) as max_montant_offre FROM histo
 ON h1.idenchere = h3.idenchere AND h1.montant_offre = h3.max_montant_offre
 INNER JOIN historiqueoffre h2 ON h1.idenchere = h2.idenchere AND h1.montant_offre = h2.montant_offre
 INNER JOIN utilisateur u ON h2.idutilisateur = u.idutilisateur;
+
+
+
+----view categorie Produit Vendu----
+create or replace view categorieProduitVendu as
+WITH all_categories AS (SELECT idCategorieProduit FROM CategorieProduit)
+SELECT cp2.idCategorieProduit, cp2.typeCategorie , COUNT(re.idEnchere) as total_produit_vendu
+FROM all_categories cp
+LEFT JOIN Produit p
+using(idCategorieProduit)
+LEFT JOIN Produit_Enchere pe
+using(idProduit)
+LEFT JOIN Enchere e
+using(idEnchere)
+LEFT JOIN ResultatEnchere re
+ON re.idEnchere = e.idEnchere AND re.idEnchere = pe.idEnchere
+LEFT JOIN CategorieProduit cp2
+ON cp2.idCategorieProduit = cp.idCategorieProduit
+GROUP BY cp2.idCategorieProduit,cp2.typeCategorie order by COUNT(re.idEnchere) desc;

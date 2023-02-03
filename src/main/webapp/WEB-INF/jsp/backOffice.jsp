@@ -31,7 +31,7 @@ List<CategorieProduit> liste= (List<CategorieProduit>) request.getAttribute("lis
             <div class="sidebar-brand-text mx-3"><span>Enchère</span></div>
         </a>
             <hr class="sidebar-divider my-0">
-            <ul class="navbar-nav text-light" id="accordionSidebar">
+            <ul class="navbar-nav text-light  bg-gradient-warning" id="accordionSidebar">
                 <li class="nav-item">
                     <a class="nav-link active" href="/ListeRechargementCompte"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -64 640 640" width="1em" height="1em" fill="currentColor">
                     <!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
@@ -40,14 +40,15 @@ List<CategorieProduit> liste= (List<CategorieProduit>) request.getAttribute("lis
                 <li class="nav-item">
                     <a class="nav-link active" href="/Statistique"><i class="fas fa-sort-amount-up-alt"></i><span>&nbsp;Statistiques</span></a>
                 </li>
+                
             </ul>
             <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
         </div>
     </nav>
-    <div class="d-flex flex-column" id="content-wrapper">
+    <div class="d-flex flex-column bg-gradient-warning" id="content-wrapper">
         <div id="content">
-            <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
-                <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button><span style="color: rgb(0,0,0);font-weight: bold;">ACCUEIL</span>
+            <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top ">
+                <div class="container-fluid  bg-gradient-success"><button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button><span style="color: rgb(0,0,0);font-weight: bold;">ACCUEIL</span>
                     <ul class="navbar-nav flex-nowrap ms-auto">
                         <li class="nav-item dropdown d-sm-none no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><i class="fas fa-search"></i></a>
                             <div class="dropdown-menu dropdown-menu-end p-3 animated--grow-in" aria-labelledby="searchDropdown">
@@ -75,10 +76,10 @@ List<CategorieProduit> liste= (List<CategorieProduit>) request.getAttribute("lis
                 <div class="row">
                     <div class="col">
                         <div class="card">
-                            <div class="card-header py-3">
-                                <p class="text-primary m-0 fw-bold">Liste des catégories</p>
+                            <div class="card-header py-3 bg-gradient-success ">
+                                <p class="text-light mx-auto m-0 fw-bold ">Liste des catégories</p>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body btn bg-gradient-warning w-50 mx-auto">
                                 <section class="newsletter-subscribe py-4 py-xl-5">
                                     <div class="container">
                                         <form class="d-flex justify-content-center flex-wrap" action="/newCategorie" method="POST">

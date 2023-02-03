@@ -6,6 +6,7 @@ import com.example.demo.models.Admin;
 
 import java.security.MessageDigest;
 import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.util.Formatter;
@@ -45,7 +46,9 @@ public class TokenAdminDao {
             Date expiration = Date.valueOf(LocalDate.now().plusDays(3));
             String role = "Admin";
             String requete = "insert into tokenAdmin(idadmin,token,datecreation,dateexpiration,role) values ('"+a.getIdadmin()+"','"+token+"','"+creation+"','"+expiration+"','"+role+"')";
-            Connexion con = new Connexion(requete);
+            Connexion con = new Connexion();
+            PreparedStatement preparedStatement= con.prepareStatement(requete);
+            preparedStatement.executeUpdate();
             System.out.println("la requete est" + requete);
             return token;
         } catch (Exception e) {

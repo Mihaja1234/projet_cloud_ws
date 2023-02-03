@@ -41,7 +41,7 @@ public class ManipDb {/* this class is for all database manipulations */
     }
 
     public static Connection pgConnect(String user, String database, String password) throws Exception {
-        Class.forName("org.postgresql.Driver");
+        //Class.forName("org.postgresql.Driver");
         database="railway";
         String url = "jdbc:postgresql://containers-us-west-176.railway.app:6766/" + database;
         user="postgres";

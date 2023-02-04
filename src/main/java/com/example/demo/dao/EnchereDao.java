@@ -202,41 +202,44 @@ public class EnchereDao {
 
 
     public PreparedStatement generateStatement(Connexion conn, String startDate,String endDate,
-                                               String category,String auctionStatus, String keywords) {
+                                               String category,String auctionStatus, String keywords,String typecategorie) {
         PreparedStatement stmt =null;
         try {
 
-            String query = "SELECT e.*, p.nomproduit FROM enchere e join produit_enchere pe using (idenchere) " +
-                    "join produit p using (idproduit) WHERE 1=1";
+            String query = " select*from enchere e inner join produit_enchere pe using(idenchere) inner join produit p using(idproduit) inner join categorieproduit cp using(idcategorieproduit) WHERE 1=1";
             StringBuilder sb = new StringBuilder(query);
 
 
             int parameterIndex = 1;
 
             // check if the user entered a start date
-            if (startDate != null) {
+            if (!startDate.equals("")) {
                 sb.append(" AND dateheureenchere >= '"+java.sql.Date.valueOf(startDate)+"'");
 
             }
 
             // check if the user entered an end date
-            if (endDate != null) {
-                sb.append(" AND dateheureenchere <= '"+java.sql.Date.valueOf(startDate)+"'");
+            if (!endDate.equals("")) {
+                sb.append(" AND dateheureenchere <= '"+java.sql.Date.valueOf(endDate)+"'");
+            }
+
+            if(!typecategorie.equals("")){
+                sb.append(" AND typecategorie LIKE '%"+typecategorie+"%'");
             }
 
             // check if the user entered a category
-            if (category != null) {
+            if (!category.equals("")) {
                 sb.append(" AND e.description  like '%"+category+"%'");
             }
 
             // check if the user entered an auction status
-            if (auctionStatus != null) {
+            if (!auctionStatus.equals("")) {
 
                 sb.append(" AND status = '"+auctionStatus+"'");
             }
             // check if the user entered a name or description
-            if (keywords != null) {
-                sb.append(" AND (nomproduit LIKE '%"+keywords+"%' OR e.description LIKE '%"+keywords+"%')");
+            if (!keywords.equals("")) {
+                sb.append(" AND (nomproduit LIKE '%"+keywords+"%' OR e.description LIKE '%"+keywords+"%' OR typecategorie like '%"+keywords+"%')");
             }
             query=sb.toString();
             stmt = conn.prepareStatement(query);

@@ -191,10 +191,10 @@ public class EnchereRestController {
                                         @RequestParam(required = false, value="datefin") String endDate,
                                         @RequestParam(required = false, value="description") String category,
                                         @RequestParam(required = false, value="status") String auctionStatus,
-                                        @RequestParam(required = false, value="motcle") String keywords){
-        Connexion con1 = new Connexion();
-
-        PreparedStatement stmt = ed.generateStatement(con1,startDate,endDate,category,auctionStatus,keywords);
+                                        @RequestParam(required = false, value="motcle") String keywords,
+                                        @RequestParam(required = false, value="typecategorie") String typecategorie){
+        Connexion con1=new Connexion();
+        PreparedStatement stmt = ed.generateStatement(con1,startDate,endDate,category,auctionStatus,keywords,typecategorie);
         List<Enchere> encheres= null;
         try {
             encheres = ed.getListEnchereRecherche(stmt);

@@ -66,6 +66,9 @@ public class TokenAdminDao {
         } catch (Exception e) {
             throw e;
         }
+        finally {
+            conn.close();
+        }
     }
 
     public int validTokenAdmin(String token) throws Exception

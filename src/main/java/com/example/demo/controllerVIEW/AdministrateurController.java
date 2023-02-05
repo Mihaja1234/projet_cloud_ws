@@ -20,7 +20,6 @@ import java.util.List;
 @Controller
 public class AdministrateurController {
 
-    Connexion con;
 
     Connection con1 = ManipDb.pgConnect("postgres","cloudfinal","hardi");
 
@@ -62,12 +61,13 @@ public class AdministrateurController {
 
     @RequestMapping("/backOffice")
     public String backOffice(HttpServletRequest request) throws Exception {
-
+    Connexion con=new Connexion();
         HttpSession session = request.getSession();
         if(session.getAttribute("admin")!=null){
             List<CategorieProduit> listeCategorie = cp.getListCategorie(con1);
             request.setAttribute("chiffreAffaire",p.ChiffreAffaire(con));
             request.setAttribute("listeCategorie",listeCategorie);
+            con.close();
             return "backOffice";
         }else {
             return "/";
@@ -76,11 +76,13 @@ public class AdministrateurController {
 
     @RequestMapping("/ListeRechargementCompte")
     public String ListeRechargementCompte(HttpServletRequest request) throws Exception{
+        Connexion con=new Connexion();
         HttpSession session = request.getSession();
         if(session.getAttribute("admin")!=null){
             request.setAttribute("chiffreAffaire",p.ChiffreAffaire(con));
             List<Object[]> listeRechargementCompte = a.listeRechargementCompte(con);
             request.setAttribute("listeRechargementCompte", listeRechargementCompte);
+            con.close();
             return "ListeRechargementCompte";
         }else {
             return "/";
@@ -89,6 +91,7 @@ public class AdministrateurController {
 
     @RequestMapping("/Validation/{idRechargementCompte}/{idUtilisateur}/{montant}")
     public String ListeRechargementCompte(HttpServletRequest request,@PathVariable int idRechargementCompte,@PathVariable int idUtilisateur,@PathVariable float montant) throws Exception{
+        Connexion con=new Connexion();
         HttpSession session = request.getSession();
         if(session.getAttribute("admin")!=null){
             a.ValiderRechargementCompte(idRechargementCompte,con);
@@ -96,6 +99,7 @@ public class AdministrateurController {
             request.setAttribute("chiffreAffaire",p.ChiffreAffaire(con));
             List<Object[]> listeRechargementCompte = a.listeRechargementCompte(con);
             request.setAttribute("listeRechargementCompte", listeRechargementCompte);
+            con.close();
             return "redirect:/backOffice";
         }else {
             return "/";
@@ -114,16 +118,20 @@ public class AdministrateurController {
 
     @PostMapping("/newCategorie")
     public String newCategorie(HttpServletRequest request) throws Exception {
+        Connexion con=new Connexion();
         String typecategorie = request.getParameter("typeCategorie");
         cp.setTypeCategorie(typecategorie);
         cp.NewCategorie(con);
+        con.close();
         return "redirect:/backOffice";
     }
 
     @PostMapping("/pourcentage")
     public String setPourcentage(HttpServletRequest request) throws Exception {
+        Connexion con=new Connexion();
         float pourcentage = Float.parseFloat(request.getParameter("pourcentage"));
         p.setPourcentage(con,pourcentage);
+        con.close();
         return "redirect:/backOffice";
     }
 

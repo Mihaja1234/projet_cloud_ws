@@ -18,9 +18,9 @@ public class AdminDao {
     UtilisateurDao ud = new UtilisateurDao();
     public Admin login(String user, String mdp) throws Exception {
         Admin admin;
-        try {
             String requete = "select * from Admin where email='" + user + "' and mdp='" + mdp + "' ";
             Connexion c = new Connexion(requete);
+        try {
             ResultSet res = c.getResultset();
             c.getResultset().next();
             int idadmin = c.getResultset().getInt(1);
@@ -29,6 +29,9 @@ public class AdminDao {
             admin = new Admin(idadmin, email, motdepasse);
         } catch (Exception e) {
             return null;
+        }
+        finally{
+            c.close();
         }
         return admin;
     }
